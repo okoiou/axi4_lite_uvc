@@ -1,8 +1,8 @@
 /*
-      * * * Environment class, by default creates two agents and scoreboard.
-            One agent is configured as Master, other as Slave.
-            Both agent's monitors are connected to Scoreboards through Analysis ports.
-            Feel free to adapt ENV to meet your specific needs.
+Environment class, by default creates two agents and scoreboard.
+One agent is configured as Master, other as Slave.
+Both agent's monitors are connected to Scoreboards through Analysis ports.
+Feel free to adapt ENV to meet your specific needs.
 */
 
 
@@ -14,8 +14,6 @@ class axi4_lite_env extends uvm_env;
     axi4_lite_agent#(32,32) master_agent;
     axi4_lite_agent#(32,32) slave_agent;
     axi4_lite_sb sb; 
-
-	//axi4_lite_virtual_sequencer m_virt_seqr;
 
     extern function new (string name, uvm_component parent);
     extern virtual function void build_phase (uvm_phase phase);
@@ -42,7 +40,6 @@ function void axi4_lite_env:: build_phase (uvm_phase phase);
 
     sb = axi4_lite_sb::type_id::create("sb",this);
     
-	//m_virt_seqr = axi4_lite_virtual_sequencer::type_id::create("m_virt_seqr", this)
 endfunction : build_phase 
  
 function void axi4_lite_env:: connect_phase (uvm_phase phase);
@@ -54,8 +51,6 @@ function void axi4_lite_env:: connect_phase (uvm_phase phase);
     if (cfg_env.has_slave_agent == 1) begin    
     slave_agent.mon.axi4_lite_mon_r_analysis_port.connect(sb.r_mon_imp);
     end
-
-	//m_virt_seqr.m_sequencer = master_agent.write_seqr;
 
 endfunction : connect_phase
 
